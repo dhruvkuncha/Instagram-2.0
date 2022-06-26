@@ -21,17 +21,17 @@ const PopupLike = () => {
   const [likes, setLikes] = useState([]);
   const [postId, setPostId] = useRecoilState(modalPostState)
 
-  console.log("pop", openLike);
+  console.log("pop", postId);
 
-//   useEffect(
-//     () =>
-//       onSnapshot(collection(db, "posts", postId, "likes"), (snapshot) => {
-//         snapshot.forEach((doc) => {
-//           setLikes(snapshot.docs);
-//         });
-//       }),
-//     [db, postId]
-//   );
+  useEffect(
+    () =>
+      onSnapshot(collection(db, 'posts', postId, 'likes'), (snapshot) => {
+        snapshot.forEach((doc) => {
+          setLikes(snapshot.docs);
+        });
+      }),
+    [db, postId]
+  );
 
   return (
     <Transition.Root show={openLike} as={Fragment}>
@@ -56,7 +56,7 @@ const PopupLike = () => {
           >
             <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></Dialog.Overlay>
           </Transition.Child>
-          <span className="hidden sm:inline-block sm:align-middle sm:h-screen">
+          <span className="hidden sm:inline-block sm:align-middle sm:h-screen sm:w-screen">
             &#8203;
           </span>
           <Transition.Child
@@ -83,10 +83,10 @@ const PopupLike = () => {
                     </Dialog.Title>
                     <div></div>
 
-                    <div className="mt-2">
+                    <div className="mt-10">
                       {/* list of likes */}
                       {likes.length > 0 ? (
-                        <div className="ml-10 h-20 overflow-y-scroll scrollbar-thumb-black scrollbar-thin">
+                        <div className="flex justify-center h-20 overflow-y-scroll scrollbar-thumb-black scrollbar-thin">
                           {likes.map((like) => (
                             <div
                               key={like.id}
@@ -95,9 +95,9 @@ const PopupLike = () => {
                               <img
                                 src={like.data().userImage}
                                 alt="user-img"
-                                className="h-7 rounded-full"
+                                className="h-7 rounded-full "
                               />
-                              <p className="text-sm flex-1">
+                              <p className="text-sm">
                                 <span className="font-bold">
                                   {like.data().username}
                                 </span>
@@ -118,7 +118,7 @@ const PopupLike = () => {
                         disabled:cursor-not-allowed hover:disabled:bg-gray-300"
                     // onClick={uploadPost}
                   >
-                    {/* {loading ? 'Uploading...' : 'Upload Post'} */}
+                    Close
                   </button>
                 </div>
               </div>

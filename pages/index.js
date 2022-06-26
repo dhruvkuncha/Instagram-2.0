@@ -23,6 +23,7 @@ export default function Home() {
 
       {/* Footer containing Icons */}
       {/* <Footer /> */}
+      <Footer />
       
       
 

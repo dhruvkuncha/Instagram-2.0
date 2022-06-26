@@ -29,8 +29,9 @@ import Moment from "react-moment";
 import { HomeIcon, HeartIcon as HeartIconFilled } from "@heroicons/react/solid";
 import { db } from "../firebase";
 import { useRecoilState } from "recoil";
-import { likeState } from "../atoms/modalAtom";
 import { modalLikeState } from "../atoms/modalLikeAtom";
+import { modalPostState } from "../atoms/modalPostState";
+
 
 const Post = ({ id, username, userImg, img, caption }) => {
   const { data: session } = useSession();
@@ -39,7 +40,19 @@ const Post = ({ id, username, userImg, img, caption }) => {
   const [likes, setLikes] = useState([]);
   const [hasLiked, setHasLiked] = useState(false);
   const [openLike, setOpenLike] = useRecoilState(modalLikeState)
-  // const [postId, setPostId] = useRecoilState(modalPostState)
+  const [postId, setPostId] = useRecoilState(modalPostState)
+
+
+  useEffect(
+    () =>
+      onSnapshot(collection(db, "posts", id, "likes"), (snapshot) => {
+        snapshot.forEach((doc) => {
+          setLikes(snapshot.docs);  
+          
+        });
+      }),
+    [db, id]
+  );
 
   const sendComment = async (e) => {
     e.preventDefault();
@@ -58,9 +71,12 @@ const Post = ({ id, username, userImg, img, caption }) => {
     if (hasLiked) {
       await deleteDoc(doc(db, "posts", id, "likes", session.user.uid));
       setHasLiked(false)
+      setLikes(likes.filter((like) => like.id !== session?.user?.uid))
+
     } else {
       await setDoc(doc(db, "posts", id, "likes", session.user.uid), {
-        username: session.user.username,
+        username: session?.user.username,
+        userImage: session?.user?.image,
       });
     }
   };
@@ -80,15 +96,7 @@ const Post = ({ id, username, userImg, img, caption }) => {
     [db, id]
   );
 
-  useEffect(
-    () =>
-      onSnapshot(collection(db, "posts", id, "likes"), (snapshot) => {
-        snapshot.forEach((doc) => {
-          setLikes(snapshot.docs);
-        });
-      }),
-    [db, id]
-  );
+  
 
   useEffect(
     () =>
@@ -98,7 +106,7 @@ const Post = ({ id, username, userImg, img, caption }) => {
     [likes]
   );
 
-
+console.log('likelen', likes)
 
   return (
     <div className="bg-white my-7 border rounded-sm">
@@ -135,10 +143,10 @@ const Post = ({ id, username, userImg, img, caption }) => {
       )}
 
       {/* Caption */}
-      <p className="p-5">
+      <p className="p-5 truncate">
         {likes.length > 0 && (<p className="font-bold mb-1 text-sm">{likes.length} <button type="button" onClick={() => {
           setOpenLike(true)
-          // setPostId(id)
+          setPostId(id)
           }}>likes</button></p>)}
         <span className="font-bold mr-1">{username}</span>
         {caption}
