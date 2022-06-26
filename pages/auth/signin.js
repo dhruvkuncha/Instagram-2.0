@@ -1,18 +1,17 @@
-import { async } from "@firebase/util";
 import React from "react";
-import { getProviders, signIn } from "next-auth/react";
+import { getProviders, signIn as SignInProvider } from "next-auth/react";
 import Header from "../../components/Header";
 
-export default () => (
+const signIn = () => (
   <>
     <Header />
     <div className="flex flex-col items-center justify-center min-h-screen py-2 -mt-56 px-14 text-center">
-      <img src="https://links.papareact.com/ocw" alt="Logo" className="w-80"/>
+      <img src="https://links.papareact.com/ocw" alt="Logo" className="w-80" />
       <p className="font-xs italic">Welcome to Instagram 2.0 </p>
       <div className="mt-20">
         <button
           className="p-3 bg-blue-500 rounded-lg text-white"
-          onClick={() => signIn("google", {callbackUrl : '/'})}
+          onClick={() => SignInProvider("google", { callbackUrl: "/" })}
         >
           Sign in with Google
         </button>
@@ -29,3 +28,5 @@ export async function getServerSideProps() {
     },
   };
 }
+
+export default signIn;

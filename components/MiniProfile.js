@@ -22,10 +22,10 @@ const MiniProfile = () => {
           </h2>
           <h3 className="text-sm text-gray-400">@{session?.user.username}</h3>
           <div className="flex items-center justify-between mt-3 space-x-2">
-            <div class="flex">
+            <div className="flex">
               <span className="mr-1 font-semibold">55 </span> Post
             </div>
-            <div class="flex">
+            <div className="flex">
               <span className="mr-1 font-semibold">10k </span> Followers
             </div>
             <div className="flex">
