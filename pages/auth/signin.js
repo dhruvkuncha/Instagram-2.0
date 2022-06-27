@@ -9,17 +9,20 @@ const signIn = ({ providers }) => (
       <img src="https://links.papareact.com/ocw" alt="Logo" className="w-80" />
       <p className="font-xs italic">Welcome to Instagram 2.0 </p>
       <div className="mt-20">
-        <button
-          className="p-3 bg-blue-500 rounded-lg text-white"
-          onClick={() =>
-            SignInProvider("google", {
-              callbackUrl:
-                "https://instagram-2-0-beryl.vercel.app/api/auth/callback/google",
-            })
-          }
-        >
-          Sign in with Google
-        </button>
+        {Object.values(providers).map((provider) => (
+          <div key={provider.name}>
+            <button
+              className="p-3 bg-blue-500 rounded-lg text-white"
+              onClick={() =>
+                SignInProvider(provider.id, {
+                  callbackUrl: '/',
+                })
+              }
+            >
+              Sign in with {provider.name}
+            </button>
+          </div>
+        ))}
       </div>
     </div>
   </>
