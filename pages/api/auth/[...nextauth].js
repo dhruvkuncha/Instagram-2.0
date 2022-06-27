@@ -7,11 +7,12 @@ export default NextAuth({
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: 'https://instagram-2-0-beryl.vercel.app/auth/google/callback',
     }),
   ],
   secret: 'IamVeryHandsome',
   pages: {
-    signIn: "/auth/signin",
+    signIn: '/auth/signin',
   },
   callbacks: {
     async session({ session, token, user }) {
