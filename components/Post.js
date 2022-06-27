@@ -80,6 +80,19 @@ const Post = ({ id, username, userImg, img, caption }) => {
       });
     }
   };
+  // const savePost = async () => {
+  //   if (hasLiked) {
+  //     await deleteDoc(doc(db, "posts", id, "saves", session.user.uid));
+  //     setHasLiked(false)
+  //     setLikes(likes.filter((like) => like.id !== session?.user?.uid))
+
+  //   } else {
+  //     await setDoc(doc(db, "posts", id, "saves", session.user.uid), {
+  //       username: session?.user.username,
+  //       userImage: session?.user?.image,
+  //     });
+  //   }
+  // };
   useEffect(
     () =>
       onSnapshot(

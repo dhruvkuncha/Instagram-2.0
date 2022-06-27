@@ -39,6 +39,7 @@ const PopupLike = () => {
         as="div"
         className="fixed z-10 inset-0 overflow-auto"
         onClose={setOpenLike}
+        
       >
         <div
           className="flex items-end justify-center min-h-[800px] sm:min-h-screen pt-4 px-4 
@@ -56,7 +57,7 @@ const PopupLike = () => {
           >
             <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></Dialog.Overlay>
           </Transition.Child>
-          <span className="hidden sm:inline-block sm:align-middle sm:h-screen sm:w-screen">
+          <span className="hidden sm:inline-block sm:align-middle sm:h-screen">
             &#8203;
           </span>
           <Transition.Child
@@ -116,7 +117,7 @@ const PopupLike = () => {
                         px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none
                         focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:text-sm disabled:bg-gray-300
                         disabled:cursor-not-allowed hover:disabled:bg-gray-300"
-                    // onClick={uploadPost}
+                    onClick={() => setOpenLike(false)}
                   >
                     Close
                   </button>
