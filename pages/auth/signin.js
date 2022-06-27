@@ -2,7 +2,9 @@ import React from "react";
 import { getProviders, signIn as SignInProvider } from "next-auth/react";
 import Header from "../../components/Header";
 
-const signIn = () => (
+const signIn = ({providers}) => (
+
+  
   <>
     <Header />
     <div className="flex flex-col items-center justify-center min-h-screen py-2 -mt-56 px-14 text-center">
@@ -11,7 +13,7 @@ const signIn = () => (
       <div className="mt-20">
         <button
           className="p-3 bg-blue-500 rounded-lg text-white"
-          onClick={() => SignInProvider({ callbackUrl: "/" })}
+          onClick={() => SignInProvider('google', { callbackUrl: '/' })}
         >
           Sign in with Google
         </button>
