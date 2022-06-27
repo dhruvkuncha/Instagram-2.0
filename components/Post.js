@@ -119,7 +119,7 @@ const Post = ({ id, username, userImg, img, caption }) => {
     [likes]
   );
 
-console.log('likelen', likes)
+console.log('likelen', session)
 
   return (
     <div className="bg-white my-7 border rounded-sm">

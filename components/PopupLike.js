@@ -20,6 +20,7 @@ const PopupLike = () => {
   const [openLike, setOpenLike] = useRecoilState(modalLikeState);
   const [likes, setLikes] = useState([]);
   const [postId, setPostId] = useRecoilState(modalPostState)
+ 
 
   console.log("pop", postId);
 
@@ -40,10 +41,11 @@ const PopupLike = () => {
         className="fixed z-10 inset-0 overflow-auto"
         onClose={setOpenLike}
         
+        
       >
         <div
           className="flex items-end justify-center min-h-[800px] sm:min-h-screen pt-4 px-4 
-        pb-20 text-center sm:block sm:p-0
+        pb-40 w-full ml-0 text-center sm:block sm:p-0
         "
         >
           <Transition.Child
@@ -82,16 +84,16 @@ const PopupLike = () => {
                     >
                       Likes
                     </Dialog.Title>
-                    <div></div>
+                    
 
                     <div className="mt-10">
                       {/* list of likes */}
                       {likes.length > 0 ? (
-                        <div className="flex justify-center h-20 overflow-y-scroll scrollbar-thumb-black scrollbar-thin">
+                        <div className="ml-10 h-30 w-50 overflow-y-scroll scrollbar-thumb-black scrollbar-thin">
                           {likes.map((like) => (
                             <div
                               key={like.id}
-                              className="flex items-center space-x-2 mb-3"
+                              className="inline-flex items-center space-x-2 w-60 mb-5"
                             >
                               <img
                                 src={like.data().userImage}
@@ -128,6 +130,8 @@ const PopupLike = () => {
         </div>
       </Dialog>
     </Transition.Root>
+    
+      
   );
 };
 
