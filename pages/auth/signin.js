@@ -13,7 +13,7 @@ const signIn = ({providers}) => (
       <div className="mt-20">
         <button
           className="p-3 bg-blue-500 rounded-lg text-white"
-          onClick={() => SignInProvider('google', { callbackUrl: 'https://instagram-2-0-beryl.vercel.app' })}
+          onClick={() => SignInProvider('google', { callbackUrl: 'https://instagram-2-0-beryl.vercel.app/' })}
         >
           Sign in with Google
         </button>
