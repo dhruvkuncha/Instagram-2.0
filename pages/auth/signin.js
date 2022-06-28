@@ -2,9 +2,13 @@ import React from "react";
 // import { getProviders, signIn as SignInProvider } from "next-auth/react";
 import Header from "../../components/Header";
 
-import { getProviders, signIn } from "next-auth/react"
+import { getProviders, signIn, useSession} from "next-auth/react"
+
 
 export default function SignIn({ providers }) {
+  const {data : session} = useSession();
+  console.log('userdata', session?.user)
+  
   return (
     <>
     <Header />

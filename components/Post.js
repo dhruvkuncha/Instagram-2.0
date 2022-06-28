@@ -31,7 +31,7 @@ import { db } from "../firebase";
 import { useRecoilState } from "recoil";
 import { modalLikeState } from "../atoms/modalLikeAtom";
 import { modalPostState } from "../atoms/modalPostState";
-
+import PostDropDown from "./PostDropDown";
 
 const Post = ({ id, username, userImg, img, caption }) => {
   const { data: session } = useSession();
@@ -39,16 +39,14 @@ const Post = ({ id, username, userImg, img, caption }) => {
   const [comment, setComment] = useState("");
   const [likes, setLikes] = useState([]);
   const [hasLiked, setHasLiked] = useState(false);
-  const [openLike, setOpenLike] = useRecoilState(modalLikeState)
-  const [postId, setPostId] = useRecoilState(modalPostState)
-
+  const [openLike, setOpenLike] = useRecoilState(modalLikeState);
+  const [postId, setPostId] = useRecoilState(modalPostState);
 
   useEffect(
     () =>
       onSnapshot(collection(db, "posts", id, "likes"), (snapshot) => {
         snapshot.forEach((doc) => {
-          setLikes(snapshot.docs);  
-          
+          setLikes(snapshot.docs);
         });
       }),
     [db, id]
@@ -70,9 +68,8 @@ const Post = ({ id, username, userImg, img, caption }) => {
   const likePost = async () => {
     if (hasLiked) {
       await deleteDoc(doc(db, "posts", id, "likes", session.user.uid));
-      setHasLiked(false)
-      setLikes(likes.filter((like) => like.id !== session?.user?.uid))
-
+      setHasLiked(false);
+      setLikes(likes.filter((like) => like.id !== session?.user?.uid));
     } else {
       await setDoc(doc(db, "posts", id, "likes", session.user.uid), {
         username: session?.user.username,
@@ -109,8 +106,6 @@ const Post = ({ id, username, userImg, img, caption }) => {
     [db, id]
   );
 
-  
-
   useEffect(
     () =>
       setHasLiked(
@@ -119,7 +114,7 @@ const Post = ({ id, username, userImg, img, caption }) => {
     [likes]
   );
 
-console.log('likelen', session)
+  console.log("likelen", session);
 
   return (
     <div className="bg-white my-7 border rounded-sm">
@@ -131,7 +126,8 @@ console.log('likelen', session)
           className="rounded-full h-12 w-12 object-contain p-1 mr-3"
         />
         <p className="flex-1 font-bold">{username}</p>
-        <DotsHorizontalIcon className="h-5" />
+        <PostDropDown id={id}/>
+       
       </div>
       {/* Image */}
       <img src={img} alt="image" className="object-cover w-full" />
@@ -157,10 +153,20 @@ console.log('likelen', session)
 
       {/* Caption */}
       <p className="p-5 truncate">
-        {likes.length > 0 && (<p className="font-bold mb-1 text-sm">{likes.length} <button type="button" onClick={() => {
-          setOpenLike(true)
-          setPostId(id)
-          }}>likes</button></p>)}
+        {likes.length > 0 && (
+          <p className="font-bold mb-1 text-sm">
+            {likes.length}{" "}
+            <button
+              type="button"
+              onClick={() => {
+                setOpenLike(true);
+                setPostId(id);
+              }}
+            >
+              likes
+            </button>
+          </p>
+        )}
         <span className="font-bold mr-1">{username}</span>
         {caption}
       </p>
@@ -206,6 +212,7 @@ console.log('likelen', session)
           </button>
         </form>
       )}
+      
     </div>
   );
 };
