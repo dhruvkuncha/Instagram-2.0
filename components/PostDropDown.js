@@ -28,12 +28,12 @@ const PostDropDown = ({id}) => {
 
       <Menu.Items
         id="dropdown"
-        class="z-10 bg-white divide-y divide-gray-100 rounded shadow-xl w-44"
+        className="z-10 bg-white divide-y divide-gray-100 rounded shadow-xl w-44"
       >
         <Menu.Item>
             <a
               href="#"
-              class="block px-4 py-2 hover:bg-red-500 hover:text-white"
+              className="block px-4 py-2 hover:bg-red-500 hover:text-white"
               onClick={deletePost}
             >
                 
@@ -45,7 +45,7 @@ const PostDropDown = ({id}) => {
          <Menu.Item>
             <a
               href="#"
-              class="block px-4 py-2 hover:bg-red-500 hover:text-white"
+              className="block px-4 py-2 hover:bg-red-500 hover:text-white"
             >
               Settings
             </a>
@@ -54,7 +54,7 @@ const PostDropDown = ({id}) => {
         <Menu.Item>
             <a
               href="#"
-              class="block px-4 py-2 hover:bg-red-500 hover:text-white"
+              className="block px-4 py-2 hover:bg-red-500 hover:text-white"
             >
               Earnings
             </a>
@@ -63,7 +63,7 @@ const PostDropDown = ({id}) => {
         <Menu.Item>  
             <a
               href="#"
-              class="block px-4 py-2 hover:bg-red-500 hover:text-white"
+              className="block px-4 py-2 hover:bg-red-500 hover:text-white"
             >
               Sign out
             </a>
