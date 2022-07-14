@@ -5,6 +5,7 @@ import Stories from "./Stories";
 import Suggestions from "./Suggestions";
 import {useSession, signOut} from 'next-auth/react'
 import PopupLike from "./PopupLike";
+import FirebaseWrite from "./FirebaseWrite";
 
 
 const Feed = () => {
@@ -29,6 +30,8 @@ const Feed = () => {
 
         <div className="fixed top-10">
 
+        
+
         <MiniProfile />
         {/* Suggestions */}
         <Suggestions />
@@ -36,6 +39,7 @@ const Feed = () => {
         {/* Mini Profile */}
       </section>
       {/* <PopupLike /> */}
+      
       
       </>
       

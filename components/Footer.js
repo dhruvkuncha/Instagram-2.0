@@ -28,8 +28,8 @@ const Footer = () => {
 
   return (
     <>
-      <footer className="fixed bg-white w-full bottom-0 pb-4 pt-2">
-        <div className="flex flex-col justify-between  max-w-6xl mx-5 lg:hidden md:hidden">
+      <footer className="fixed bg-white w-full bottom-0 pb-4 pt-2 lg:hidden md:hidden">
+        <div className="flex flex-col justify-between  max-w-6xl mx-5">
           <div className="flex justify-evenly space-x-32 ">
             <HomeIcon
               className="navBtn-mobile"

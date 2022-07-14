@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Image from "next/dist/client/image";
 import {
   SearchIcon,
@@ -8,12 +8,26 @@ import {
   PaperAirplaneIcon,
   MenuIcon,
 } from "@heroicons/react/outline";
-
+import {
+  onSnapshot,
+  collection,
+  addDoc,
+  serverTimestamp,
+  query,
+  orderBy,
+  setDoc,
+  doc,
+  getDoc,
+  deleteDoc,
+} from "@firebase/firestore";
+import { db } from "../firebase";
+// import { Search, Grid } from 'semantic-ui-react'
 import { HomeIcon } from "@heroicons/react/solid";
 import {useSession, signOut, signIn} from 'next-auth/react'
 import { useRouter } from "next/router";
 import { modalState } from "../atoms/modalAtom";
 import {useRecoilState} from 'recoil'
+import Search from "./Search";
 
 
 
@@ -22,8 +36,28 @@ const Header = () => {
   const {data: session} = useSession()
 
   const [open, setOpen] = useRecoilState(modalState)
+  const [users, setUsers] = useState([])
+  
 
   const router = useRouter();
+  
+  useEffect(() => {
+    onSnapshot(
+      collection(db, "users"),
+      (snapshot) => {
+        snapshot.forEach((doc) => {
+          setUsers(snapshot.docs);
+          // console.log('user', session?.uid)
+        });
+      }
+    );
+  }, [db]);
+
+
+
+// console.log(filterUsers)
+
+
   
 
   return (
@@ -39,16 +73,9 @@ const Header = () => {
              </div>
 
         {/* Search */}
-        <div className="relative mt-1 p-3 rounded-md max-w-xs">
-          <div className="absolute inset-y-0 pl-3 flex items-center pointer-events-none">
-            <SearchIcon className="h-5 w-5" />
-          </div>
-          <input
-            className="bg-gray-50 block w-full pl-10 sm:text-sm rounded-md focus:ring-black focus:border-black border-gray-300"
-            type="text"
-            placeholder="Search"
-          ></input>
-        </div>
+         
+    <Search users={users}/>
+     
 
         {/* Icons */}
         <div className="flex items-center justify-end space-x-4">

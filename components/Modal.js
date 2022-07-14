@@ -4,7 +4,7 @@ import { useRecoilState } from "recoil";
 import { modalState } from "../atoms/modalAtom";
 import { CameraIcon } from "@heroicons/react/outline";
 import { useRef, useState } from "react";
-import {db, storage} from '../firebase'
+import {db, storage, auth} from '../firebase'
 import {useSession} from 'next-auth/react'
 import {ref, getDownloadURL, uploadString} from '@firebase/storage'
 import { addDoc, serverTimestamp, collection, updateDoc, doc } from "@firebase/firestore";
@@ -57,9 +57,9 @@ const Modal = () => {
     setLoading(false)
     setSelectedFile(null)
 
-
   }
-  // console.log(open)
+  // console.log('userid', session?.user)
+ 
 
   return (
     <Transition.Root show={open} as={Fragment}>

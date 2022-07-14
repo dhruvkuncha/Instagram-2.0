@@ -23,6 +23,7 @@ import {
   orderBy,
   setDoc,
   doc,
+  getDoc,
   deleteDoc,
 } from "@firebase/firestore";
 import Moment from "react-moment";
@@ -32,7 +33,9 @@ import { useRecoilState } from "recoil";
 import { modalLikeState } from "../atoms/modalLikeAtom";
 import { modalPostState } from "../atoms/modalPostState";
 import PostDropDown from "./PostDropDown";
+import { useRouter } from "next/router";
 
+ 
 const Post = ({ id, username, userImg, img, caption }) => {
   const { data: session } = useSession();
   const [comments, setComments] = useState([]);
@@ -41,6 +44,11 @@ const Post = ({ id, username, userImg, img, caption }) => {
   const [hasLiked, setHasLiked] = useState(false);
   const [openLike, setOpenLike] = useRecoilState(modalLikeState);
   const [postId, setPostId] = useRecoilState(modalPostState);
+
+  const router = useRouter();
+
+
+  console.log("likelen", session?.user.uid);
 
   useEffect(
     () =>
@@ -60,6 +68,7 @@ const Post = ({ id, username, userImg, img, caption }) => {
     await addDoc(collection(db, "posts", id, "comments"), {
       comment: commentToSend,
       username: session.user.username,
+      userId: session?.user.uid,
       userImage: session.user.image,
       timeStamp: serverTimestamp(),
     });
@@ -73,6 +82,7 @@ const Post = ({ id, username, userImg, img, caption }) => {
     } else {
       await setDoc(doc(db, "posts", id, "likes", session.user.uid), {
         username: session?.user.username,
+        userId: session?.user.uid,
         userImage: session?.user?.image,
       });
     }
@@ -114,7 +124,7 @@ const Post = ({ id, username, userImg, img, caption }) => {
     [likes]
   );
 
-  console.log("likelen", session);
+
 
   return (
     <div className="bg-white my-7 border rounded-sm">
@@ -123,9 +133,10 @@ const Post = ({ id, username, userImg, img, caption }) => {
         <img
           src={userImg}
           alt="user-pic"
-          className="rounded-full h-12 w-12 object-contain p-1 mr-3"
+          className="rounded-full h-12 w-12 object-contain p-1 mr-3 cursor-pointer"
+          onClick={() => router.push(`/${username}`)}
         />
-        <p className="flex-1 font-bold">{username}</p>
+        <p className="flex-1 font-bold cursor-pointer" onClick={() => router.push(`/${username}`)}>{username}</p>
         <PostDropDown id={id}/>
        
       </div>
@@ -167,7 +178,7 @@ const Post = ({ id, username, userImg, img, caption }) => {
             </button>
           </p>
         )}
-        <span className="font-bold mr-1">{username}</span>
+        <span className="font-bold mr-1 cursor-pointer" onClick={() => router.push(`/${username}`)}>{username}</span>
         {caption}
       </p>
       {/* Comments */}
