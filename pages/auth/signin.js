@@ -16,12 +16,12 @@ import { handleSignIn } from "../../components/FirebaseWrite";
 
 export default function SignIn({ providers }) {
   const { data: session } = useSession();
-  console.log("userdata", session?.user);
+
 
   // const handleSignIn = async () => {
   //   const usersRef = collection(db, "users");
   //   const q = query(usersRef, where("userId", "==", session.user.uid));
-  //   console.log('q', q)
+
 
   //   if(q.length === 0){
   //       await setDoc(doc(db, "users", session.user.uid), {
@@ -34,7 +34,7 @@ export default function SignIn({ providers }) {
   //       });
   //   }
 
-  //   // console.log("New user added with doc id: ", docRef.id);
+  
   // };
 
   return (

@@ -43,7 +43,7 @@ const Modal = () => {
       timeStamp: serverTimestamp()
 
     })
-    console.log('New doc added with doc id: ', docRef.id)
+
 
     const imageRef = ref(storage, `posts/${docRef.id}/image`);
 
@@ -58,7 +58,7 @@ const Modal = () => {
     setSelectedFile(null)
 
   }
-  // console.log('userid', session?.user)
+
  
 
   return (

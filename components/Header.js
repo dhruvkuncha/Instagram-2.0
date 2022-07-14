@@ -47,7 +47,7 @@ const Header = () => {
       (snapshot) => {
         snapshot.forEach((doc) => {
           setUsers(snapshot.docs);
-          // console.log('user', session?.uid)
+
         });
       }
     );
@@ -55,7 +55,7 @@ const Header = () => {
 
 
 
-// console.log(filterUsers)
+
 
 
   

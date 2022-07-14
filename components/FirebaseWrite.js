@@ -22,7 +22,7 @@ const FirebaseWrite = () => {
     await getDoc(usersRef).then((doc) => {
       setSigned(doc.data());
     });
-    console.log("q", signed);
+
 
     if (!signed?.length) {
       await setDoc(doc(db, "users", session.user.uid), {

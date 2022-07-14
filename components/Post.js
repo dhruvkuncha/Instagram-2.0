@@ -48,7 +48,7 @@ const Post = ({ id, username, userImg, img, caption }) => {
   const router = useRouter();
 
 
-  console.log("likelen", session?.user.uid);
+
 
   useEffect(
     () =>

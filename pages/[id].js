@@ -45,7 +45,7 @@ const UserDetail = ({ user }) => {
     getUser();
   }, [routerId]);
 
-  // console.log("hello", users);
+
 
   if(users.length === 0){
     return <p>Loading...</p>

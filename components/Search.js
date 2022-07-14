@@ -15,7 +15,7 @@ const Search = ({ users }) => {
   //     setFilterUsers(newFilter)
 
   //   }
-  // //   console.log(filterUsers)
+
 
   const [value, setValue] = useState("");
   const router = useRouter();
@@ -27,9 +27,9 @@ const Search = ({ users }) => {
   const onSearch = (searchTerm) => {
     setValue(searchTerm);
 
-    console.log("search ", searchTerm);
+
   };
-  console.log(users);
+
   return (
     <>
       <div className="relative mt-1 p-3 rounded-md max-w-xs flex flex-col">

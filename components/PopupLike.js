@@ -22,7 +22,7 @@ const PopupLike = () => {
   const [postId, setPostId] = useRecoilState(modalPostState)
  
 
-  console.log("pop", postId);
+
 
   useEffect(
     () =>

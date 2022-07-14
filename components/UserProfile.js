@@ -64,7 +64,7 @@ const UserProfile = ({ session, users }) => {
       (snapshot) => {
         snapshot.forEach((doc) => {
           setSessionUserFollowing(snapshot.docs);
-          // console.log('user', session?.uid)
+
         });
       }
     );
@@ -76,7 +76,7 @@ const UserProfile = ({ session, users }) => {
       (snapshot) => {
         snapshot.forEach((doc) => {
           setCurrentUserFollowers(snapshot.docs);
-          console.log("user");
+       
         });
       }
     );
@@ -88,7 +88,7 @@ const UserProfile = ({ session, users }) => {
         (snapshot) => {
           snapshot.forEach((doc) => {
             setCurrentUserFollowing(snapshot.docs);
-            // console.log('user')
+
           });
         }
       ),
@@ -102,7 +102,7 @@ const UserProfile = ({ session, users }) => {
       ) !== -1
     );
   }, [sessionUserFollowing]);
-  console.log(currentUserFollowers);
+
   return (
     <div>
       <Header />
@@ -232,7 +232,7 @@ const UserProfile = ({ session, users }) => {
                 </a>
               </li>
               <li>
-                <a className="inline-block p-3" href="/">
+                <a className="inline-block p-3" href="#">
                   <i className="far fa-square text-xl md:text-xs"></i>
                   <span className="hidden md:inline">igtv</span>
                 </a>

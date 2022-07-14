@@ -30,7 +30,7 @@ const MiniProfile = () => {
 
       // const q = await getDocs(collection(db, "users"));
 
-      // const paths = q.docs.map((doc) => {console.log('crazy',doc.data())});
+ 
 
       if (!signed?.length) {
         await setDoc(doc(db, "users", session.user.uid), {
@@ -48,7 +48,7 @@ const MiniProfile = () => {
 
   
 
-  console.log("q", signed);
+
 
   return (
     <div className="card bg-white shadow-lg rounded-2xl flex mt-14 m-10">
